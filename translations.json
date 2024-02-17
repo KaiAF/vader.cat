@@ -1,0 +1,14 @@
+{
+  "en": {
+    "other-lang": "cat",
+    "hello-everyone": "Hello everyone",
+    "this-is-a-small-webpage-that-will-display-pictures-of-my-cat--vader-": "This is a small webpage that will display pictures of my cat, vader.",
+    "switch-language": "Switch to Catalan"
+  },
+  "cat": {
+    "other-lang": "en",
+    "hello-everyone": "Hola a tothom",
+    "this-is-a-small-webpage-that-will-display-pictures-of-my-cat--vader-": "Aquesta és una petita pàgina web que mostrarà imatges del meu gat, Vader.",
+    "switch-language": "Canviar a l'anglès"
+  }
+}
