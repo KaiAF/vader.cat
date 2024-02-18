@@ -4,33 +4,25 @@ const path = require('path');
 const fs = require('fs');
 const fsp = require('fs/promises');
 
+app.set('view engine', 'ejs');
 app.use(require('cookie-parser')());
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', async function (req, res) {
   try {
+    const photos = await fsp.readdir('public/vader');
     const allTranslations = JSON.parse((await fsp.readFile('translations.json')).toString());
     const translations = allTranslations[req.cookies.language || 'en'] || allTranslations['en'];
-    const regex = /\${([^}]*)}/gm;
-    let html = (await fsp.readFile('public/index.html')).toString().replace(/\r/g, '');
 
-    let m;
-    while ((m = regex.exec(html)) !== null) {
-      html = html.replace(m[0], translations[m[1]]);
-    }
-
-    res.send(html);
+    res.render('index', {
+      lang: translations,
+      photos: photos.map(id => `<img width="336" src="vader/${id}" alt="vader ${id}" />`).join('\n'),
+    });
   } catch (e) {
     console.error(e);
-    if (fs.existsSync('public/index.html')) {
-      const html = (await fsp.readFile('public/index.html')).toString();
-      res.status(500).send(html);
-    } else {
-      res.sendStatus(500);
-    }
+    res.sendStatus(500);
   }
 });
-
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/language/cat', function (req, res) {
   res.cookie('language', 'cat');

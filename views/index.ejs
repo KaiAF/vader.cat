@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vader, the cat.</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    body {
+      padding: 5px;
+      background-color: gray;
+    }
+
+    div.spacer {
+      padding-top: 5px;
+    }
+
+    div.photos {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+    }
+  </style>
+</head>
+<body>
+  <div style="float:right">
+    <a href="/language/<%= lang['other-lang'] %>"><%= lang['switch-language'] %></a>
+  </div>
+  <h1><%= lang['hello-everyone'] %></h1>
+  <p><%= lang['this-is-a-small-webpage-that-will-display-pictures-of-my-cat--vader-'] %></p>
+  <hr>
+  <div class="spacer"></div>
+  <h2>About</h2>
+  <p>
+    Vader was born sometime in 2017 and was homeless.<br>
+    He came to my family with his brother, Garfield. They both were young but clearly in need of a home. We promptly took them in, and the rest is pretty much history.
+  </p>
+  <p>Vader is a very relaxed cat and enjoys being petted on his face.</p>
+  <p>Most photos of him are blurry for some reason, the camera seems to not like to focus on his face. 😺</p>
+  <p>Vader is currently ~<%= (new Date().getFullYear()) - 2017 %> years old.</p>
+  <div class="spacer"></div>
+  <hr>
+  <h2>Photos</h2>
+  <div class="spacer"></div>
+  <div class="photos">
+    <%- photos %>
+  </div>
+</body>
+</html>
