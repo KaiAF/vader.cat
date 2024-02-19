@@ -14,13 +14,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', async function (req, res) {
   try {
-    const photos = await fsp.readdir(process.env.PICS);
+    const photos = (await fsp.readdir(process.env.PICS)).filter(a => a.endsWith('.webp')).map(id => `<img width="336" src="vader/${id}" alt="vader ${id}" />`).join('\n');
     const allTranslations = JSON.parse((await fsp.readFile('translations.json')).toString());
     const translations = allTranslations[req.cookies.language || 'en'] || allTranslations['en'];
 
     res.render('index', {
       lang: translations,
-      photos: photos.map(id => `<img width="336" src="vader/${id}" alt="vader ${id}" />`).join('\n'),
+      photos,
     });
   } catch (e) {
     console.error(e);
@@ -34,7 +34,7 @@ app.get('/vader/:fileName', async function (req, res) {
     const image = await fsp.readFile(`${process.env.PICS}/${req.params.fileName}`);
 
     res.set('cache-control', 'public, max-age=604800');
-    res.writeHead(200, { 'Content-Type': 'image/png', 'Content-Length': image.length });
+    res.writeHead(200, { 'Content-Type': 'image/webp', 'Content-Length': image.length });
     res.end(image);
   } catch (e) {
     console.error(e);
