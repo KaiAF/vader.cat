@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kai, the cat.</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    body {
+      padding: 5px;
+      background-color: gray;
+    }
+
+    div.spacer {
+      padding-top: 5px;
+    }
+
+    div.photos {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+    }
+  </style>
+</head>
+<body>
+  <div style="float:right">
+    <a href="/language/<%= lang['other-lang'] %>"><%= lang['switch-language'] %></a>
+  </div>
+  <h1><%= lang['hello-everyone'] %></h1>
+  <p><%= lang['this-is-a-small-webpage-that-will-display-pictures-of-my-cat--kai-'] %></p>
+  <hr>
+  <div class="spacer"></div>
+  <h3>More cats</h3>
+  <p>I have more cats to display on this webpage.</p>
+  <a href="/">Vader</a>
+  <div class="spacer"></div>
+  <hr>
+  <h2>Photos</h2>
+  <div class="spacer"></div>
+  <div class="photos">
+    <%- photos %>
+  </div>
+</body>
+</html>
+<%#
+  <div style="float:right">
+    <a href="/language/< %= lang['other-lang'] % >">< %= lang['switch-language'] % ></a>
+  </div>
+  <h1>< %= lang['hello-everyone'] % ></h1>
+  <p>< %= lang['this-is-a-small-webpage-that-will-display-pictures-of-my-cat--Kai-'] % ></p>
+  <hr>
+  <div class="spacer"></div>
+  <h2>About</h2>
+  <p>
+    Kai's situation is very similar to our other cat, vader. She was born sometime in 2017 and was also homeless.<br>
+    She came to us shortly after we had adopted Vader and Garfield. She also came with another cat that we also adopted, Sterling. They both were more willing to come inside our home through out the day and go outside through the night.<br>
+    Both Sterling and Kai weren't exactly inside cats, but they came inside whenever they wanted and often stayed for days at a time.
+  </p>
+  <p>Kai is super relaxed and chill, loves to be held for short periods of time. She is not really a vocal cat...</p>
+  <p>Late 2023 she had gotten an infection that caused a little hole on her side, which we obviously took care of. While this was happening, we had agreed to officially 'retire' her. Meaning she will not be allowed outside anymore 😺</p>
+  <p>Kai is currently ~< %= (new Date().getFullYear()) - 2017 % >-< %= (new Date().getFullYear()) - 2016 % > years old.</p>
+  <div class="spacer"></div>
+%>

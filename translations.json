@@ -2,13 +2,15 @@
   "en": {
     "other-lang": "cat",
     "hello-everyone": "Hello everyone",
-    "this-is-a-small-webpage-that-will-display-pictures-of-my-cat--vader-": "This is a small webpage that will display pictures of my cat, vader.",
+    "this-is-a-small-webpage-that-will-display-pictures-of-my-cat--vader-": "This is a small webpage that will display pictures of my cat, Vader.",
+    "this-is-a-small-webpage-that-will-display-pictures-of-my-cat--kai-": "This is a small webpage that will display pictures of my cat, Kai.",
     "switch-language": "Switch to Catalan"
   },
   "cat": {
     "other-lang": "en",
     "hello-everyone": "Hola a tothom",
     "this-is-a-small-webpage-that-will-display-pictures-of-my-cat--vader-": "Aquesta és una petita pàgina web que mostrarà imatges del meu gat, Vader.",
+    "this-is-a-small-webpage-that-will-display-pictures-of-my-cat--kai-": "Aquesta és una petita pàgina web que mostrarà imatges del meu gat, Kai.",
     "switch-language": "Canviar a l'anglès"
   }
 }

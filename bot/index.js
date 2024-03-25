@@ -1,8 +1,13 @@
-const { Client, GatewayIntentBits, Events } = require('discord.js');
+const {
+  Client,
+  GatewayIntentBits,
+  Events,
+} = require('discord.js');
 const sharp = require('sharp');
 const fs = require('fs');
 
-const PICS_PATH = process.env.PICS.toString();
+const VADER_PICS = process.env.PICS.toString();
+const KAI_PICS = process.env.KAI_PICS.toString();
 
 const client = new Client({
   intents: [
@@ -28,7 +33,9 @@ client.on(Events.MessageCreate, async (message) => {
     if (message.author.bot) return;
     if (!ALLOWED_IDS.includes(message.author.id)) return;
     const args = message.content.split(' ');
-    if (args[0].toLowerCase() !== '!vader') return;
+    const command = args[0].slice(1).toLowerCase();
+    if (command !== 'vader' && command !== 'kai') return;
+    const PICS_PATH = command === 'kai' ? KAI_PICS : VADER_PICS;
     if (message.partial) await message.fetch();
     if (message.reference) message = await message.fetchReference();
 
