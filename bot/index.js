@@ -52,13 +52,19 @@ client.on(Events.MessageCreate, async (message) => {
           const buffer = await (await fetch(v.url)).arrayBuffer();
           const hash = Buffer.from(buffer).toString('hex').slice(-28);
           if (fs.existsSync(`${PICS_PATH}/${hash}.webp`)) return message.reply({ content: 'image already exists', allowedMentions: { repliedUser: false } });
+          const ogWidth = v.width;
+          const ogHeight = v.height;
+          const width = ogWidth / 4 | 0;
+          const height = ogHeight / 4 | 0;
+
+          console.log(`[Debug] parsing image:\n        ${ogWidth}x${ogHeight}\n        ${width}x${height}`);
 
           await sharp(buffer)
-            .resize(v.width / 4 | 0, v.height / 4 | 0)
+            .resize(width, height)
             .webp({ quality: 80 })
             .toFile(`${PICS_PATH}/${hash}.webp`);
 
-          message.reply({ content: 'uploaded', allowedMentions: { repliedUser: false } });
+          message.reply({ content: `uploaded. image data: ${width}x${height} with the size of ${((await fs.promises.stat(`${PICS_PATH}/${hash}.webp`)).size / 1000).toFixed(2)}kb`, allowedMentions: { repliedUser: false } });
         } catch (e) {
           console.error(e);
           message.reply({ content: 'there was an error creating image' });
