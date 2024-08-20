@@ -42,22 +42,27 @@ client.on(Events.MessageCreate, async (message) => {
     if (message.attachments.size > 0) {
       // has image
       message.attachments.forEach(async (v, k) => {
-        if (
-          v.contentType !== 'image/jpg' &&
-          v.contentType !== 'image/jpeg' &&
-          v.contentType !== 'image/png'
-        ) return;
+        try {
+          if (
+            v.contentType !== 'image/jpg' &&
+            v.contentType !== 'image/jpeg' &&
+            v.contentType !== 'image/png'
+          ) return;
 
-        const buffer = await (await fetch(v.url)).arrayBuffer();
-        const hash = Buffer.from(buffer).toString('hex').slice(-28);
-        if (fs.existsSync(`${PICS_PATH}/${hash}.webp`)) return message.reply({ content: 'image already exists', allowedMentions: { repliedUser: false } });
+          const buffer = await (await fetch(v.url)).arrayBuffer();
+          const hash = Buffer.from(buffer).toString('hex').slice(-28);
+          if (fs.existsSync(`${PICS_PATH}/${hash}.webp`)) return message.reply({ content: 'image already exists', allowedMentions: { repliedUser: false } });
 
-        await sharp(buffer)
-          .resize(v.width / 4, v.height / 4)
-          .webp({ quality: 80 })
-          .toFile(`${PICS_PATH}/${hash}.webp`);
+          await sharp(buffer)
+            .resize(v.width / 4 | 0, v.height / 4 | 0)
+            .webp({ quality: 80 })
+            .toFile(`${PICS_PATH}/${hash}.webp`);
 
-        message.reply({ content: 'uploaded', allowedMentions: { repliedUser: false } });
+          message.reply({ content: 'uploaded', allowedMentions: { repliedUser: false } });
+        } catch (e) {
+          console.error(e);
+          message.reply({ content: 'there was an error creating image' });
+        }
       });
     } else {
       message.reply({ content: 'no attachments', allowedMentions: { repliedUser: false } });
